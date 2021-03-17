@@ -22,7 +22,7 @@ Olá {Fulano}, de {Jandira}, seja bem-vindo. -->
     $nome = isset($_POST['nome']) ? $_POST['nome'] : null;
     $cidade = isset($_POST['cidades']) ? $_POST['cidades'] : null;
 
-    $cidadeEscolhida = $cidades[$cidade];
+    isset($cidade) ? $cidadeEscolhida = $cidades[$cidade] : null;
     
 ?>
 <!DOCTYPE html>
@@ -57,7 +57,7 @@ Olá {Fulano}, de {Jandira}, seja bem-vindo. -->
         </div>
                 
         <div>
-        <h1>Olá <?= $nome ?>, de <?=$cidadeEscolhida?>, seja bem-vindo.</h1>
+        <h1>Olá <?= $nome ?>, de <?=isset($cidade)? $cidadeEscolhida: null?>, seja bem-vindo.</h1>
         </div>
         <button>Eniviar</button>
     </form>
