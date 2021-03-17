@@ -19,11 +19,11 @@ Olá {Fulano}, de {Jandira}, seja bem-vindo. -->
         8 => "São Paulo"
     ];
 
-    $nome = $_POST['nome'];
-    $cidade = $_POST['cidades'];
-    
-    $resposta ="Olá ". $nome . ", de " . $cidades[$cidade] . ", seja bem-vindo.";
+    $nome = isset($_POST['nome']) ? $_POST['nome'] : null;
+    $cidade = isset($_POST['cidades']) ? $_POST['cidades'] : null;
 
+    $cidadeEscolhida = $cidades[$cidade];
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,26 +42,22 @@ Olá {Fulano}, de {Jandira}, seja bem-vindo. -->
         </div>
         <label>Informa sua cidade:</label>
         <div class="input-group">
-            <select name="cidades" id="cidades">
-                <?php
-                for($i=1; $i <= count($cidades);$i++){
+
+            <select name="cidades" id="cidades" required>
+            <option selected value="">SELECIONE</option>
+            <?php
+                foreach($cidades as $indice => $listaCidade){
             ?>
-            <option value="<?=$i?>"><?=$cidades[$i]?></option>
+            <option value="<?=$indice?>"><?=$listaCidade?></option>
             <?php
                 }
-                ?>
-            <!-- <option><?=$cidades[2]?></option>
-            <option><?=$cidades[3]?></option>
-            <option><?=$cidades[4]?></option>
-            <option><?=$cidades[5]?></option>
-            <option><?=$cidades[6]?></option>
-            <option><?=$cidades[7]?></option>
-            <option><?=$cidades[8]?></option> -->
-        </select>
-    </div>
-    
-        <div >
-        <h2><?=$resposta?></h2>
+            ?>
+            </select>
+
+        </div>
+                
+        <div>
+        <h1>Olá <?= $nome ?>, de <?=$cidadeEscolhida?>, seja bem-vindo.</h1>
         </div>
         <button>Eniviar</button>
     </form>
